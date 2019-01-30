@@ -15,6 +15,11 @@
 		E80F01D62177E18F007F4158 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80F01D52177E18F007F4158 /* ListViewController.swift */; };
 		E80F01DA2178D125007F4158 /* TextItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80F01D92178D125007F4158 /* TextItemViewController.swift */; };
 		E81BB54B2183C82E00F19074 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81BB54A2183C82E00F19074 /* CameraViewController.swift */; };
+		E8B83CEA219385550066C30A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B83CE9219385550066C30A /* ImageCollectionViewCell.swift */; };
+		E8B83CEC2193891F0066C30A /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B83CEB2193891F0066C30A /* PersistentService.swift */; };
+		E8B83CEE219480C50066C30A /* TextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B83CED219480C50066C30A /* TextCollectionViewCell.swift */; };
+		E8B83CF12194A5180066C30A /* ListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B83CEF2194A5180066C30A /* ListItem+CoreDataClass.swift */; };
+		E8B83CF22194A5180066C30A /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B83CF02194A5180066C30A /* ListItem+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		E80F01D52177E18F007F4158 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E80F01D92178D125007F4158 /* TextItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextItemViewController.swift; sourceTree = "<group>"; };
 		E81BB54A2183C82E00F19074 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		E8B83CE9219385550066C30A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E8B83CEB2193891F0066C30A /* PersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
+		E8B83CED219480C50066C30A /* TextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCollectionViewCell.swift; sourceTree = "<group>"; };
+		E8B83CEF2194A5180066C30A /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E8B83CF02194A5180066C30A /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +70,16 @@
 		E80F01BF2177A680007F4158 /* QuickList */ = {
 			isa = PBXGroup;
 			children = (
+				E8B83CEF2194A5180066C30A /* ListItem+CoreDataClass.swift */,
+				E8B83CF02194A5180066C30A /* ListItem+CoreDataProperties.swift */,
 				E80F01C02177A680007F4158 /* AppDelegate.swift */,
+				E8B83CEB2193891F0066C30A /* PersistentService.swift */,
 				E80F01C22177A680007F4158 /* MainTabBarController.swift */,
 				E80F01D52177E18F007F4158 /* ListViewController.swift */,
 				E81BB54A2183C82E00F19074 /* CameraViewController.swift */,
 				E80F01D92178D125007F4158 /* TextItemViewController.swift */,
+				E8B83CE9219385550066C30A /* ImageCollectionViewCell.swift */,
+				E8B83CED219480C50066C30A /* TextCollectionViewCell.swift */,
 				E80F01CC2177A683007F4158 /* LaunchScreen.storyboard */,
 				E80F01CF2177A683007F4158 /* Info.plist */,
 				E80F01C72177A680007F4158 /* QuickList.xcdatamodeld */,
@@ -145,9 +160,14 @@
 			files = (
 				E80F01DA2178D125007F4158 /* TextItemViewController.swift in Sources */,
 				E80F01D62177E18F007F4158 /* ListViewController.swift in Sources */,
+				E8B83CF12194A5180066C30A /* ListItem+CoreDataClass.swift in Sources */,
 				E80F01C32177A680007F4158 /* MainTabBarController.swift in Sources */,
+				E8B83CF22194A5180066C30A /* ListItem+CoreDataProperties.swift in Sources */,
+				E8B83CEA219385550066C30A /* ImageCollectionViewCell.swift in Sources */,
+				E8B83CEC2193891F0066C30A /* PersistentService.swift in Sources */,
 				E80F01C12177A680007F4158 /* AppDelegate.swift in Sources */,
 				E80F01C92177A680007F4158 /* QuickList.xcdatamodeld in Sources */,
+				E8B83CEE219480C50066C30A /* TextCollectionViewCell.swift in Sources */,
 				E81BB54B2183C82E00F19074 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +307,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQ9XN8S2Z9;
 				INFOPLIST_FILE = QuickList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +326,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQ9XN8S2Z9;
 				INFOPLIST_FILE = QuickList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

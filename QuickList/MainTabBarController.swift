@@ -20,7 +20,6 @@ class MainTabBarController: UITabBarController {
     }
     
     func setupTabBar() {
-        
         let listViewController = UINavigationController(rootViewController: ListViewController())
         listViewController.tabBarItem.image = UIImage(named: "home")
         

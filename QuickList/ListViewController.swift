@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 
-private let reuseIdentifier = "Cell"
-
-class ListViewController: UICollectionViewController {
+class ListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let moContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let imageCell = "imageCell"
+    let textCell = "textCell"
+    let moContext = PersistentService.context
+    var listItems = [ListItem]()
     
     public init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -26,75 +27,96 @@ class ListViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
+        self.title = "Quick List"
+        
+        // comment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
         
+        collectionView.isPagingEnabled = true
+        
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: self.imageCell)
+        collectionView.register(TextCollectionViewCell.self, forCellWithReuseIdentifier: self.textCell)
         
         // Do any additional setup after loading the view.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getListItems()
     }
-    */
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.edgesForExtendedLayout = []
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 0
+        }
+    }
+    
+    func getListItems() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ListItem")
+        
+        do {
+            listItems = try moContext.fetch(request) as! [ListItem]
+        } catch {
+            fatalError("Failed to fetch list items: \(error)")
+        }
+    
+        self.collectionView.reloadData()
+    }
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return listItems.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let listItem = self.listItems[indexPath.item]
+        
+        if(listItem.image != nil) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageCell, for: indexPath) as! ImageCollectionViewCell
+            cell.itemImageView.image = UIImage(data: listItem.image! as Data)
+            cell.deleteTapAction = {
+                () in
+                print("Deleting Item")
+                let itemIndex = self.collectionView?.indexPath(for: cell)!
+                self.listItems.remove(at: itemIndex!.item)
+                self.collectionView?.deleteItems(at: [itemIndex!])
+                self.moContext.delete(listItem)
+                PersistentService.saveContext()
+            }
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: textCell, for: indexPath) as! TextCollectionViewCell
+            cell.itemTextLabel.text = listItem.text ?? "Empty"
+            cell.deleteTapAction = {
+                () in
+                print("Deleting Item")
+                let itemIndex = self.collectionView?.indexPath(for: cell)!
+                self.listItems.remove(at: itemIndex!.item)
+                self.collectionView?.deleteItems(at: [itemIndex!])
+                self.moContext.delete(listItem)
+                PersistentService.saveContext()
+            }
+            return cell
+        }
+
+    }
     
-        // Configure the cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+    }
     
-        return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
