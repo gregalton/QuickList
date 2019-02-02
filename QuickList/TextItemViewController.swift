@@ -23,32 +23,15 @@ class TextItemViewController: UIViewController, UITextFieldDelegate {
         textItemField.borderStyle = .roundedRect
         textItemField.backgroundColor = UIColor.black
         textItemField.textAlignment = .center
+        textItemField.adjustsFontSizeToFitWidth = true
         textItemField.returnKeyType = .done
         return textItemField
     }()
-    
-    /* Lost to simplification
-    private lazy var addItemButton: UIButton = {
-        let addItemButton = UIButton()
-        addItemButton.translatesAutoresizingMaskIntoConstraints = false
-        addItemButton.tintColor = UIColor.white
-        addItemButton.setTitle("Add", for: .normal)
-        addItemButton.titleLabel!.font = UIFont.systemFont(ofSize: 30)
-        return addItemButton
-    }()
-    */
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Add Text Item"
         self.textItemField.delegate = self
-        
-        // Dismiss keyboard when tapping in view
-        /* Lost to simplification, but this didn't work and I need to know why
-        self.tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        self.view.addGestureRecognizer(tap!)
-        self.view.isUserInteractionEnabled = true
-        */
         
         setupViews()
     }
@@ -76,27 +59,7 @@ class TextItemViewController: UIViewController, UITextFieldDelegate {
         textItemField.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16).isActive = true
         textItemField.heightAnchor.constraint(equalToConstant: 150.0).isActive = true
         
-        /* Lost to simplification
-        self.view.addSubview(addItemButton)
-        addItemButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        addItemButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -70).isActive = true
-        addItemButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        */
     }
-    
-    /* Lost to simplification
-    @objc func addButtonTapped() {
-        print("add button tapped")
-    }
-    */
-    
-    
-    
-    /*
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        textField.resignFirstResponder()
-    }
-    */
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -20,6 +20,7 @@ class TextCollectionViewCell: UICollectionViewCell {
         itemTextLabel.textColor = UIColor.white
         itemTextLabel.font = UIFont(name: "Helvetica", size: 30)
         itemTextLabel.textAlignment = .center
+        itemTextLabel.adjustsFontSizeToFitWidth = true
         return itemTextLabel
     }()
     
