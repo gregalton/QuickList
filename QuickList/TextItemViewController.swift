@@ -54,7 +54,7 @@ class TextItemViewController: UIViewController, UITextFieldDelegate {
     func setupViews() {
 
         self.view.addSubview(textItemField)
-        textItemField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 150).isActive = true
+        textItemField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 150).isActive = true
         textItemField.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16).isActive = true
         textItemField.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16).isActive = true
         textItemField.heightAnchor.constraint(equalToConstant: 150.0).isActive = true
